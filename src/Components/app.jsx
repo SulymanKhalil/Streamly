@@ -1111,9 +1111,9 @@ function Hero() {
           </div>
           <div className="hero-stats">
             {[
-              ["25", "Projects Delivered"],
+              ["40", "Projects Delivered"],
               ["99.9%", "Uptime SLA"],
-              ["15", "Countries Served"],
+              ["18", "Countries Served"],
             ].map(([n, l]) => (
               <div key={l}>
                 <div className="hero-stat-num">
@@ -1171,10 +1171,10 @@ function StatStrip() {
     <div className="stat-strip">
       <div className="stat-strip-inner">
         {[
-          ["25+", "Projects Shipped"],
+          ["40+", "Projects Shipped"],
           ["99.9%", "Uptime SLA"],
           ["200ms", "Avg Stream Latency"],
-          ["15+", "Countries Served"],
+          ["18+", "Countries Served"],
         ].map(([n, l]) => (
           <div key={l} className="stat-block reveal">
             <div className="stat-block-num">
@@ -1365,7 +1365,7 @@ function About() {
             <div className="about-float" style={{ bottom: 24, left: 24 }}>
               <div className="about-float-label">Projects Delivered</div>
               <div className="about-float-val">
-                25<span>+</span>
+                40<span>+</span>
               </div>
             </div>
           </div>
@@ -1881,7 +1881,7 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} All rights reserved.</span>
-          <span>Lahore, Pakistan · Built for the world</span>
+          <span>Lahore, Pakistan</span>
         </div>
       </div>
     </footer>
