@@ -1361,7 +1361,7 @@ function About() {
                 ))}
               </div>
             </div>
-            <div className="about-badge">Est. 2021</div>
+            <div className="about-badge">Est. 2022</div>
             <div className="about-float" style={{ bottom: 24, left: 24 }}>
               <div className="about-float-label">Projects Delivered</div>
               <div className="about-float-val">
