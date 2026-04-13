@@ -1216,7 +1216,7 @@ function About() {
               {[
                 {
                   title: "About Us",
-                  text: "At Streamly, ming systems and cutting edge digital products. Founded in 2022, we've built streaming infrastructure for broadcasters, OTT platforms, and enterprise clients across 15+ countries. Our engineers blend deep protocol level expertise with modern cloud-native architectures to deliver systems that scale without compromise.",
+                  text: "At Streamly, We build and engineer video streaming systems and cutting edge digital products. Founded in 2022, we've built streaming infrastructure for broadcasters, OTT platforms, and enterprise clients across 15+ countries. Our engineers blend deep protocol level expertise with modern cloud-native architectures to deliver systems that scale without compromise.",
                 },
                 {
                   title: "Founder's Perspective",
