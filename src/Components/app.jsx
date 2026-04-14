@@ -967,7 +967,7 @@ function Nav() {
         <ul className="nav-links">
           {NAV_LINKS.map((l) => (
             <li key={l}>
-              <a href={`#${l.toLowerCase()}`}>{l}</a>
+              <a href={l === "Get in Touch" ? "#contact" : `#${l.toLowerCase()}`}>{l}</a>
             </li>
           ))}
         </ul>
@@ -997,7 +997,7 @@ function Nav() {
             <ul className="mobile-menu-links">
               {NAV_LINKS.map((l) => (
                 <li key={l}>
-                  <a href={`#${l.toLowerCase()}`} onClick={closeMobileMenu}>
+                  <a href={l === "Get in Touch" ? "#contact" : `#${l.toLowerCase()}`} onClick={closeMobileMenu}>
                     {l}
                   </a>
                 </li>
@@ -1846,7 +1846,7 @@ function Footer() {
             <div className="footer-col-title">Navigation</div>
             <div className="footer-links">
               {NAV_LINKS.map((l) => (
-                <a key={l} href={`#${l.toLowerCase()}`}>
+                <a key={l} href={l === "Get in Touch" ? "#contact" : `#${l.toLowerCase()}`}>
                   {l}
                 </a>
               ))}
