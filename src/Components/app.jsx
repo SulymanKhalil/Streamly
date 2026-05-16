@@ -65,6 +65,21 @@ const FA = {
       <path d="M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z" />
     </svg>
   ),
+  close: (
+    <svg width="18" height="18" viewBox="0 0 384 512" fill="currentColor">
+      <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+    </svg>
+  ),
+  pause: (
+    <svg width="14" height="14" viewBox="0 0 320 512" fill="currentColor">
+      <path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/>
+    </svg>
+  ),
+  volume: (
+    <svg width="16" height="16" viewBox="0 0 640 512" fill="currentColor">
+      <path d="M533.6 32.5C598.5 85.3 640 165.8 640 256s-41.5 170.8-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z"/>
+    </svg>
+  ),
 };
 
 /* ─── GLOBAL CSS ────────────────────────────────────────────────────── */
@@ -276,6 +291,67 @@ const GlobalStyle = () => (
     .team-card-linkedin{display:inline-flex;align-items:center;gap:6px;color:var(--text-secondary);text-decoration:none;font-size:13px;transition:var(--transition);}
     .team-card-linkedin:hover{color:var(--seafoam-dark);transform:translateY(-1px);}
 
+    /* ── CEO VIDEO ── */
+    .ceo-video-section{background:var(--navy);padding:120px 0;position:relative;}
+    .ceo-video-section .section-h2{color:var(--white);}
+    .ceo-video-header{text-align:center;max-width:620px;margin:0 auto 56px;position:relative;z-index:2;}
+    .ceo-video-sub{font-size:16px;line-height:1.7;color:rgba(255,255,255,.55);margin-top:20px;}
+    .ceo-video-stage{position:relative;z-index:2;padding:0 1rem;}
+    .ceo-video-layout{display:flex;gap:24px;transition:gap .5s var(--ease-out);}
+    .ceo-video-stage:not(.is-playing) .ceo-video-layout{gap:0;}
+    .ceo-video-col{flex:1;min-width:0;transition:flex .5s var(--ease-out);}
+    .ceo-video-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:1rem;overflow:hidden;border:none;cursor:pointer;background:var(--navy-mid);padding:0;font:inherit;text-align:inherit;display:block;transition:box-shadow .45s var(--ease-out);}
+    .ceo-video-stage:not(.is-playing) .ceo-video-frame{min-height:min(50vw,420px);}
+    .ceo-video-frame--player{cursor:default;}
+    .ceo-video-frame:focus-visible{outline:2px solid var(--seafoam);outline-offset:2px;}
+    .ceo-video-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.3s;}
+    .ceo-video-stage.is-playing .ceo-video-thumb{opacity:0;pointer-events:none;}
+    .ceo-yt-mount{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+    .ceo-yt-mount iframe{width:100%;height:100%;border:0;}
+    .ceo-video-vignette{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,39,68,.72) 0%,rgba(26,39,68,.35) 45%,rgba(95,179,161,.25) 100%);pointer-events:none;z-index:2;}
+    .ceo-video-scanlines{position:absolute;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);opacity:.5;}
+    .ceo-video-play-wrap{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;}
+    .ceo-video-play-ring{position:absolute;width:100px;height:100px;border-radius:50%;border:1px solid rgba(255,255,255,.25);animation:pulse-ring 2s ease-out infinite;}
+    .ceo-video-play-btn{position:relative;width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--salmon),var(--salmon-dark));display:flex;align-items:center;justify-content:center;color:var(--white);box-shadow:0 12px 40px rgba(232,128,106,.45);transition:transform .35s var(--ease-spring),box-shadow .35s;}
+    .ceo-video-frame:hover .ceo-video-play-btn{transform:scale(1.1);box-shadow:0 16px 48px rgba(232,128,106,.55);}
+    .ceo-video-play-btn svg{width:22px;height:22px;margin-left:4px;}
+    .ceo-video-caption{margin-top:16px;text-align:left;}
+    .ceo-video-caption-text{font-family:var(--font-display);font-size:clamp(14px,2vw,16px);font-weight:700;color:var(--white);letter-spacing:.04em;text-transform:uppercase;}
+
+    /* Custom Video Controls */
+    .ceo-video-close{position:absolute;top:20px;right:20px;width:40px;height:40px;background:rgba(26,39,68,.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);cursor:pointer;z-index:10;transition:background .3s,transform .3s;opacity:0;pointer-events:none;}
+    .ceo-video-stage.is-playing .ceo-video-close{opacity:1;pointer-events:all;}
+    .ceo-video-close:hover{background:rgba(232,128,106,.8);transform:scale(1.1);}
+    
+    .ceo-video-controls{position:absolute;bottom:20px;left:20px;right:20px;background:rgba(26,39,68,.7);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:12px 20px;display:flex;align-items:center;gap:20px;z-index:10;opacity:0;transform:translateY(10px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);pointer-events:none;}
+    .ceo-video-stage.is-playing .ceo-video-controls{opacity:1;transform:none;pointer-events:all;}
+    
+    .cvc-btn{background:transparent;border:none;color:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:color .2s;width:24px;height:24px;}
+    .cvc-btn:hover{color:var(--seafoam);}
+    .cvc-btn svg{width:16px;height:16px;}
+    .cvc-btn.play-pause svg{width:18px;height:18px;}
+    
+    .cvc-time{color:var(--white);font-size:13px;font-family:var(--font-display);font-weight:500;font-variant-numeric:tabular-nums;min-width:90px;}
+    .cvc-time span{color:rgba(255,255,255,.5);}
+    
+    .cvc-progress-wrap{flex:1;height:24px;display:flex;align-items:center;cursor:pointer;position:relative;}
+    .cvc-progress-track{width:100%;height:4px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden;position:relative;}
+    .cvc-progress-fill{position:absolute;top:0;left:0;height:100%;background:var(--seafoam);border-radius:2px;width:0%;transition:width 0.1s linear;}
+    
+    /* Transcript */
+    .ceo-transcript-wrap{opacity:0;width:0;flex-basis:0;overflow:hidden;transition:all .5s var(--ease-out);}
+    .ceo-video-stage.is-playing .ceo-transcript-wrap{opacity:1;width:50%;flex-basis:calc(50% - 12px);}
+    
+    .ceo-transcript{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1rem;padding:28px 24px;display:flex;flex-direction:column;min-height:100%;min-width:400px;}
+    .ceo-transcript-label{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--seafoam);margin-bottom:20px;flex-shrink:0;}
+    .ceo-transcript-scroll{flex:1;overflow-y:auto;max-height:min(56.25vw,52vh);padding-right:8px;scrollbar-width:thin;scrollbar-color:var(--seafoam) transparent;}
+    .ceo-transcript-scroll::-webkit-scrollbar{width:4px;}
+    .ceo-transcript-scroll::-webkit-scrollbar-thumb{background:var(--seafoam);border-radius:2px;}
+    .ceo-transcript-line{font-size:15px;line-height:1.75;color:rgba(255,255,255,.45);padding:14px 16px;border-radius:0;margin-bottom:8px;border-left:3px solid transparent;cursor:pointer;transition:color .25s,border-color .25s;}
+    .ceo-transcript-line:last-child{margin-bottom:0;}
+    .ceo-transcript-line:hover{color:rgba(255,255,255,.75);}
+    .ceo-transcript-line.active{color:var(--white);background:transparent;border-left:3px solid var(--seafoam);}
+
     /* ── TESTIMONIALS ── */
     .testi-section{background:var(--navy);padding:120px 0;position:relative;}
     .testi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:64px;}
@@ -355,6 +431,18 @@ const GlobalStyle = () => (
       .services-strip{flex-direction:column;}
       .srv-block{border-right:none;border-bottom:1px solid var(--gray-200);}
       .team-grid{grid-template-columns:1fr 1fr;}
+      .team-header{flex-direction:column;align-items:flex-start;gap:24px;}
+      .team-header p{text-align:left!important;}
+      .ceo-video-section{padding:80px 0;}
+      .ceo-video-header{margin-bottom:40px;}
+      .ceo-video-sub{font-size:15px;}
+      .ceo-video-stage.is-playing .ceo-video-layout{grid-template-columns:1fr;}
+      .ceo-video-stage:not(.is-playing) .ceo-video-frame{min-height:min(56vw,320px);}
+      .ceo-transcript-scroll{max-height:360px;}
+      .ceo-video-play-ring{width:88px;height:88px;}
+      .ceo-video-play-btn{width:68px;height:68px;}
+      .ceo-video-play-btn svg{width:18px;height:18px;}
+      .ceo-video-caption{padding:0 24px;}
       .nav-hamburger{display:flex;}
       .nav-links{display:none;}
       .testi-grid{grid-template-columns:1fr;}
@@ -374,12 +462,13 @@ const GlobalStyle = () => (
 
 /* ─── DATA ──────────────────────────────────────────────────────────── */
 const NAV_LINKS = [
-  "Home",
-  "About",
-  "Team",
-  "Services",
-  "Testimonials",
-  "Get in Touch",
+  { label: "Home", href: "#home" },
+  { label: "Our Story", href: "#about" },
+  { label: "Minds Behind", href: "#team" },
+  { label: "CEO's Words", href: "#ceo-message" },
+  { label: "Services", href: "#services" },
+  { label: "Earned Trust", href: "#testimonials" },
+  { label: "Get in Touch", href: "#contact" },
 ];
 
 const TEAM = [
@@ -966,8 +1055,8 @@ function Nav() {
 
         <ul className="nav-links">
           {NAV_LINKS.map((l) => (
-            <li key={l}>
-              <a href={l === "Get in Touch" ? "#contact" : `#${l.toLowerCase()}`}>{l}</a>
+            <li key={l.href}>
+              <a href={l.href}>{l.label}</a>
             </li>
           ))}
         </ul>
@@ -996,9 +1085,9 @@ function Nav() {
             </button>
             <ul className="mobile-menu-links">
               {NAV_LINKS.map((l) => (
-                <li key={l}>
-                  <a href={l === "Get in Touch" ? "#contact" : `#${l.toLowerCase()}`} onClick={closeMobileMenu}>
-                    {l}
+                <li key={l.href}>
+                  <a href={l.href} onClick={closeMobileMenu}>
+                    {l.label}
                   </a>
                 </li>
               ))}
@@ -1427,6 +1516,300 @@ function Team() {
   );
 }
 
+/* ─── CEO VIDEO ─────────────────────────────────────────────────────── */
+const CEO_YT_ID = "UsHGF4ox5Fs";
+
+const CEO_TRANSCRIPT = [
+  { time: 0, text: "Hello — I'm Anas Ali, Founder and CEO of Streamly. Thanks for taking the time to hear directly from us." },
+  { time: 5, text: "At Streamly, we build and engineer video streaming systems and cutting-edge digital products." },
+  { time: 10, text: "Founded in 2022, we've delivered streaming infrastructure for broadcasters, OTT platforms, and enterprise clients across more than fifteen countries." },
+  { time: 18, text: "Our engineers blend deep protocol-level expertise with modern cloud-native architectures — systems that scale without compromise." },
+  { time: 26, text: "We build scalable video streaming infrastructure designed for real-world performance." },
+  { time: 32, text: "From real-time delivery to large-scale distribution, reliability and architecture come first." },
+  { time: 38, text: "Live streaming, video on demand, WebRTC, FFmpeg pipelines, and custom media platforms — that's the core of what we ship." },
+  { time: 46, text: "We also partner on web and mobile products when streaming is the heartbeat of the experience." },
+  { time: 52, text: "We value long-term partnerships and grow with our clients over time, at global scale." },
+  { time: 58, text: "If you're exploring a project — live, VOD, or real-time — we'd love to hear what you're building." },
+];
+
+function loadYouTubeIframeAPI() {
+  return new Promise((resolve) => {
+    if (window.YT?.Player) {
+      resolve();
+      return;
+    }
+    const prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      prev?.();
+      resolve();
+    };
+    if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    }
+  });
+}
+
+function CeoVideo() {
+  const [playing, setPlaying] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [volume, setVolume] = useState(100);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [thumbSrc, setThumbSrc] = useState(`https://img.youtube.com/vi/${CEO_YT_ID}/maxresdefault.jpg`);
+  const [activeSegment, setActiveSegment] = useState(0);
+
+  const playerMountRef = useRef(null);
+  const playerRef = useRef(null);
+  const transcriptScrollRef = useRef(null);
+  const progressRef = useRef(null);
+
+  useEffect(() => {
+    if (!playing) {
+      playerRef.current?.destroy?.();
+      playerRef.current = null;
+      setDuration(0);
+      setCurrentTime(0);
+      setActiveSegment(0);
+      setPaused(false);
+      return;
+    }
+
+    let cancelled = false;
+
+    loadYouTubeIframeAPI().then(() => {
+      if (cancelled || !playerMountRef.current) return;
+
+      const ytContainer = document.createElement("div");
+      playerMountRef.current.appendChild(ytContainer);
+
+      playerRef.current = new window.YT.Player(ytContainer, {
+        videoId: CEO_YT_ID,
+        playerVars: {
+          autoplay: 1,
+          rel: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          controls: 0,
+          disablekb: 1,
+        },
+        events: {
+          onReady: (e) => {
+            if (!cancelled) {
+              setDuration(e.target.getDuration() || 0);
+              e.target.setVolume(volume);
+            }
+          },
+          onStateChange: (e) => {
+            if (e.data === window.YT.PlayerState.PLAYING) setPaused(false);
+            if (e.data === window.YT.PlayerState.PAUSED) setPaused(true);
+            if (e.data === window.YT.PlayerState.ENDED) setPlaying(false);
+          }
+        },
+      });
+    });
+
+    return () => {
+      cancelled = true;
+      try { playerRef.current?.destroy?.(); } catch { }
+      playerRef.current = null;
+      if (playerMountRef.current) {
+        playerMountRef.current.innerHTML = "";
+      }
+    };
+  }, [playing]);
+
+  useEffect(() => {
+    if (!playing) return;
+    const tick = setInterval(() => {
+      const player = playerRef.current;
+      if (!player?.getCurrentTime) return;
+      const t = player.getCurrentTime();
+      setCurrentTime(t);
+
+      let idx = 0;
+      for (let i = 0; i < CEO_TRANSCRIPT.length; i++) {
+        if (t >= CEO_TRANSCRIPT[i].time) idx = i;
+      }
+      setActiveSegment(idx);
+    }, 200);
+
+    return () => clearInterval(tick);
+  }, [playing]);
+
+  useEffect(() => {
+    const el = transcriptScrollRef.current?.querySelector(".ceo-transcript-line.active");
+    el?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [activeSegment]);
+
+  const togglePlay = (e) => {
+    e?.stopPropagation();
+    if (!playerRef.current?.getPlayerState) return;
+    if (paused) playerRef.current.playVideo();
+    else playerRef.current.pauseVideo();
+  };
+
+  const toggleMute = (e) => {
+    e?.stopPropagation();
+    if (!playerRef.current?.isMuted) return;
+    if (playerRef.current.isMuted()) {
+      playerRef.current.unMute();
+      setVolume(100);
+    } else {
+      playerRef.current.mute();
+      setVolume(0);
+    }
+  };
+
+  const handleSeek = (e) => {
+    e.stopPropagation();
+    if (!duration || !progressRef.current || !playerRef.current) return;
+    const rect = progressRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const pct = Math.max(0, Math.min(1, x / rect.width));
+    const targetTime = pct * duration;
+    playerRef.current.seekTo(targetTime, true);
+    setCurrentTime(targetTime);
+  };
+
+  const formatTime = (sec) => {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  };
+
+  const seekToSegment = (index) => {
+    const player = playerRef.current;
+    if (!player?.seekTo) return;
+    player.seekTo(CEO_TRANSCRIPT[index].time, true);
+    setActiveSegment(index);
+    if (paused) player.playVideo();
+  };
+
+  return (
+    <section className="ceo-video-section" id="ceo-message">
+      <div className="noise" />
+      <div className="section-wrap" style={{ position: "relative", zIndex: 2 }}>
+        <header className="ceo-video-header">
+          <div className="section-label reveal" style={{ justifyContent: "center" }}>
+            <div className="section-label-line" style={{ background: "var(--seafoam)" }} />
+            <span className="section-label-text" style={{ color: "var(--seafoam)" }}>
+              From the CEO
+            </span>
+            <div className="section-label-line" style={{ background: "var(--seafoam)" }} />
+          </div>
+          <h2 className="section-h2 reveal reveal-delay-1">
+            Hear It From Our <span style={{ color: "var(--seafoam)" }}>CEO</span>
+          </h2>
+          <p className="ceo-video-sub reveal reveal-delay-2">
+            Anas Ali walks through what we build, who we are, and the services
+            we deliver — straight from the architect behind Streamly.
+          </p>
+        </header>
+
+        <div className={`ceo-video-stage reveal reveal-delay-3${playing ? " is-playing" : ""}`}>
+          <div className="ceo-video-layout">
+            <div className="ceo-video-col">
+              <div 
+                className="ceo-video-frame" 
+                onClick={!playing ? () => setPlaying(true) : togglePlay}
+                aria-label={playing ? "CEO video playing" : "Play CEO introduction video"}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    if (!playing) setPlaying(true);
+                    else togglePlay();
+                  }
+                }}
+              >
+                <img
+                  className="ceo-video-thumb"
+                  src={thumbSrc}
+                  alt="CEO introduction"
+                  loading="lazy"
+                  onError={() => {
+                    if (!thumbSrc.includes("hqdefault")) {
+                      setThumbSrc(`https://img.youtube.com/vi/${CEO_YT_ID}/hqdefault.jpg`);
+                    }
+                  }}
+                />
+                {!playing && (
+                  <>
+                    <div className="ceo-video-vignette" aria-hidden="true" />
+                    <div className="ceo-video-scanlines" aria-hidden="true" />
+                    <span className="ceo-video-play-wrap" aria-hidden="true">
+                      <span className="ceo-video-play-ring" />
+                      <span className="ceo-video-play-btn">{FA.play}</span>
+                    </span>
+                  </>
+                )}
+                <div ref={playerMountRef} className="ceo-yt-mount" style={{ display: playing ? 'block' : 'none' }} />
+                
+                {/* Custom Video Controls overlay */}
+                <div 
+                  className="ceo-video-close" 
+                  onClick={(e) => { e.stopPropagation(); setPlaying(false); }}
+                  aria-label="Close video"
+                  role="button"
+                >
+                  {FA.close}
+                </div>
+                <div className="ceo-video-controls" onClick={e => e.stopPropagation()}>
+                  <button className="cvc-btn play-pause" onClick={togglePlay} aria-label={paused ? "Play" : "Pause"}>
+                    {paused ? FA.play : FA.pause}
+                  </button>
+                  <button className="cvc-btn" onClick={toggleMute} aria-label={volume === 0 ? "Unmute" : "Mute"}>
+                    {volume === 0 ? FA.close : FA.volume}
+                  </button>
+                  <div className="cvc-time">
+                    {formatTime(currentTime)} <span>/ {formatTime(duration)}</span>
+                  </div>
+                  <div className="cvc-progress-wrap" ref={progressRef} onClick={handleSeek} role="slider" aria-valuenow={currentTime} aria-valuemax={duration} tabIndex={0}>
+                    <div className="cvc-progress-track">
+                      <div className="cvc-progress-fill" style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="ceo-transcript-wrap">
+              <aside className="ceo-transcript" aria-label="Video transcript">
+                <div className="ceo-transcript-label">Live Transcript</div>
+                <div className="ceo-transcript-scroll" ref={transcriptScrollRef}>
+                  {CEO_TRANSCRIPT.slice(0, activeSegment + 1).map((seg, i) => (
+                    <p
+                      key={i}
+                      role="button"
+                      tabIndex={0}
+                      className={`ceo-transcript-line${i === activeSegment ? " active" : ""}`}
+                      onClick={() => seekToSegment(i)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          seekToSegment(i);
+                        }
+                      }}
+                    >
+                      {seg.text}
+                    </p>
+                  ))}
+                </div>
+              </aside>
+            </div>
+          </div>
+          <div className="ceo-video-caption reveal reveal-delay-4">
+            <span className="ceo-video-caption-text">What we build · Who we are · Our services</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── TESTIMONIALS ──────────────────────────────────────────────────── */
 function Testimonials() {
   return (
@@ -1846,8 +2229,8 @@ function Footer() {
             <div className="footer-col-title">Navigation</div>
             <div className="footer-links">
               {NAV_LINKS.map((l) => (
-                <a key={l} href={l === "Get in Touch" ? "#contact" : `#${l.toLowerCase()}`}>
-                  {l}
+                <a key={l.href} href={l.href}>
+                  {l.label}
                 </a>
               ))}
             </div>
@@ -1899,6 +2282,7 @@ export default function App() {
       <StatStrip />
       <About />
       <Team />
+      <CeoVideo />
       <Services />
       <Testimonials />
       <Contact />
