@@ -307,7 +307,7 @@ const GlobalStyle = () => (
     .ceo-video-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.3s;}
     .ceo-video-stage.is-playing .ceo-video-thumb{opacity:0;pointer-events:none;}
     .ceo-yt-mount{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
-    .ceo-yt-mount iframe{width:100%;height:100%;border:0;}
+    .ceo-yt-mount iframe{position:absolute;top:-100%;left:0;width:100%;height:300%;border:0;}
     .ceo-video-vignette{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,39,68,.72) 0%,rgba(26,39,68,.35) 45%,rgba(95,179,161,.25) 100%);pointer-events:none;z-index:2;}
     .ceo-video-scanlines{position:absolute;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);opacity:.5;}
     .ceo-video-play-wrap{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;}
@@ -320,16 +320,16 @@ const GlobalStyle = () => (
 
     /* Custom Video Controls */
     .ceo-video-close{position:absolute;top:20px;right:20px;width:40px;height:40px;background:rgba(26,39,68,.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);cursor:pointer;z-index:10;transition:background .3s,transform .3s;opacity:0;pointer-events:none;}
-    .ceo-video-stage.is-playing .ceo-video-close{opacity:1;pointer-events:all;}
+    .ceo-video-stage.is-playing .ceo-video-frame:hover .ceo-video-close{opacity:1;pointer-events:all;}
     .ceo-video-close:hover{background:rgba(232,128,106,.8);transform:scale(1.1);}
     
     .ceo-video-controls{position:absolute;bottom:20px;left:20px;right:20px;background:rgba(26,39,68,.7);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:12px 20px;display:flex;align-items:center;gap:20px;z-index:10;opacity:0;transform:translateY(10px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out);pointer-events:none;}
-    .ceo-video-stage.is-playing .ceo-video-controls{opacity:1;transform:none;pointer-events:all;}
+    .ceo-video-stage.is-playing .ceo-video-frame:hover .ceo-video-controls{opacity:1;transform:none;pointer-events:all;}
     
     .cvc-btn{background:transparent;border:none;color:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:color .2s;width:24px;height:24px;}
     .cvc-btn:hover{color:var(--seafoam);}
     .cvc-btn svg{width:16px;height:16px;}
-    .cvc-btn.play-pause svg{width:18px;height:18px;}
+    .cvc-btn.play-pause svg{width:14px;height:14px;}
     
     .cvc-time{color:var(--white);font-size:13px;font-family:var(--font-display);font-weight:500;font-variant-numeric:tabular-nums;min-width:90px;}
     .cvc-time span{color:rgba(255,255,255,.5);}
@@ -339,10 +339,10 @@ const GlobalStyle = () => (
     .cvc-progress-fill{position:absolute;top:0;left:0;height:100%;background:var(--seafoam);border-radius:2px;width:0%;transition:width 0.1s linear;}
     
     /* Transcript */
-    .ceo-transcript-wrap{opacity:0;width:0;flex-basis:0;overflow:hidden;transition:all .5s var(--ease-out);}
-    .ceo-video-stage.is-playing .ceo-transcript-wrap{opacity:1;width:50%;flex-basis:calc(50% - 12px);}
+    .ceo-transcript-wrap{opacity:0;flex-basis:0;width:0;position:relative;overflow:hidden;transition:all .5s var(--ease-out);}
+    .ceo-video-stage.is-playing .ceo-transcript-wrap{opacity:1;flex-basis:calc(50% - 12px);width:50%;}
     
-    .ceo-transcript{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1rem;padding:28px 24px;display:flex;flex-direction:column;min-height:100%;min-width:400px;}
+    .ceo-transcript{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1rem;padding:28px 24px;display:flex;flex-direction:column;position:absolute;inset:0;width:100%;min-width:400px;}
     .ceo-transcript-label{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--seafoam);margin-bottom:20px;flex-shrink:0;}
     .ceo-transcript-scroll{flex:1;overflow-y:auto;max-height:min(56.25vw,52vh);padding-right:8px;scrollbar-width:thin;scrollbar-color:var(--seafoam) transparent;}
     .ceo-transcript-scroll::-webkit-scrollbar{width:4px;}
@@ -1520,16 +1520,13 @@ function Team() {
 const CEO_YT_ID = "UsHGF4ox5Fs";
 
 const CEO_TRANSCRIPT = [
-  { time: 0, text: "Hello — I'm Anas Ali, Founder and CEO of Streamly. Thanks for taking the time to hear directly from us." },
-  { time: 5, text: "At Streamly, we build and engineer video streaming systems and cutting-edge digital products." },
-  { time: 10, text: "Founded in 2022, we've delivered streaming infrastructure for broadcasters, OTT platforms, and enterprise clients across more than fifteen countries." },
-  { time: 18, text: "Our engineers blend deep protocol-level expertise with modern cloud-native architectures — systems that scale without compromise." },
-  { time: 26, text: "We build scalable video streaming infrastructure designed for real-world performance." },
-  { time: 32, text: "From real-time delivery to large-scale distribution, reliability and architecture come first." },
-  { time: 38, text: "Live streaming, video on demand, WebRTC, FFmpeg pipelines, and custom media platforms — that's the core of what we ship." },
-  { time: 46, text: "We also partner on web and mobile products when streaming is the heartbeat of the experience." },
-  { time: 52, text: "We value long-term partnerships and grow with our clients over time, at global scale." },
-  { time: 58, text: "If you're exploring a project — live, VOD, or real-time — we'd love to hear what you're building." },
+  "Hi, I’m Anas — a Software Engineer with over 7 years of experience and the founder of Streamly.",
+  "I specialize in building scalable web & mobile applications, and video streaming development for startups, businesses, and growing platforms.",
+  "On the application development side, my team and I work across full-stack development using technologies like MERN Stack, TypeScript, React Native, Flutter and modern backend architectures — always choosing the right technology based on the project requirements.",
+  "For Video streaming development, I work with WebRTC for video calls, FFmpeg and GStreamer for media processing and transcoding, and HLS and RTMP for live streaming Projects.",
+  "Whether you need a modern SaaS application, a live streaming platform, or a custom media pipeline —“that’s where I can deliver the most impact.”",
+  "I believe in clear communication, reliable delivery, and building long-term partnerships with clients.",
+  "If you’re looking for someone who understands both software engineering and scalable streaming infrastructure,“Let’s discuss how we can bring your idea to production.\""
 ];
 
 function loadYouTubeIframeAPI() {
@@ -1591,8 +1588,10 @@ function CeoVideo() {
           rel: 0,
           modestbranding: 1,
           playsinline: 1,
-          controls: 0,
+          controls: 1,
           disablekb: 1,
+          showinfo: 0,
+          title: 0,
         },
         events: {
           onReady: (e) => {
@@ -1627,21 +1626,10 @@ function CeoVideo() {
       if (!player?.getCurrentTime) return;
       const t = player.getCurrentTime();
       setCurrentTime(t);
-
-      let idx = 0;
-      for (let i = 0; i < CEO_TRANSCRIPT.length; i++) {
-        if (t >= CEO_TRANSCRIPT[i].time) idx = i;
-      }
-      setActiveSegment(idx);
     }, 200);
 
     return () => clearInterval(tick);
   }, [playing]);
-
-  useEffect(() => {
-    const el = transcriptScrollRef.current?.querySelector(".ceo-transcript-line.active");
-    el?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }, [activeSegment]);
 
   const togglePlay = (e) => {
     e?.stopPropagation();
@@ -1680,11 +1668,7 @@ function CeoVideo() {
   };
 
   const seekToSegment = (index) => {
-    const player = playerRef.current;
-    if (!player?.seekTo) return;
-    player.seekTo(CEO_TRANSCRIPT[index].time, true);
-    setActiveSegment(index);
-    if (paused) player.playVideo();
+    // Progressive playback disabled, mapping disabled.
   };
 
   return (
@@ -1708,101 +1692,94 @@ function CeoVideo() {
           </p>
         </header>
 
-        <div className={`ceo-video-stage reveal reveal-delay-3${playing ? " is-playing" : ""}`}>
-          <div className="ceo-video-layout">
-            <div className="ceo-video-col">
-              <div 
-                className="ceo-video-frame" 
-                onClick={!playing ? () => setPlaying(true) : togglePlay}
-                aria-label={playing ? "CEO video playing" : "Play CEO introduction video"}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    if (!playing) setPlaying(true);
-                    else togglePlay();
-                  }
-                }}
-              >
-                <img
-                  className="ceo-video-thumb"
-                  src={thumbSrc}
-                  alt="CEO introduction"
-                  loading="lazy"
-                  onError={() => {
-                    if (!thumbSrc.includes("hqdefault")) {
-                      setThumbSrc(`https://img.youtube.com/vi/${CEO_YT_ID}/hqdefault.jpg`);
+        <div className="reveal reveal-delay-3">
+          <div className={`ceo-video-stage${playing ? " is-playing" : ""}`}>
+            <div className="ceo-video-layout">
+              <div className="ceo-video-col">
+                <div 
+                  className="ceo-video-frame" 
+                  onClick={!playing ? () => setPlaying(true) : togglePlay}
+                  aria-label={playing ? "CEO video playing" : "Play CEO introduction video"}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (!playing) setPlaying(true);
+                      else togglePlay();
                     }
                   }}
-                />
-                {!playing && (
-                  <>
-                    <div className="ceo-video-vignette" aria-hidden="true" />
-                    <div className="ceo-video-scanlines" aria-hidden="true" />
-                    <span className="ceo-video-play-wrap" aria-hidden="true">
-                      <span className="ceo-video-play-ring" />
-                      <span className="ceo-video-play-btn">{FA.play}</span>
-                    </span>
-                  </>
-                )}
-                <div ref={playerMountRef} className="ceo-yt-mount" style={{ display: playing ? 'block' : 'none' }} />
-                
-                {/* Custom Video Controls overlay */}
-                <div 
-                  className="ceo-video-close" 
-                  onClick={(e) => { e.stopPropagation(); setPlaying(false); }}
-                  aria-label="Close video"
-                  role="button"
                 >
-                  {FA.close}
-                </div>
-                <div className="ceo-video-controls" onClick={e => e.stopPropagation()}>
-                  <button className="cvc-btn play-pause" onClick={togglePlay} aria-label={paused ? "Play" : "Pause"}>
-                    {paused ? FA.play : FA.pause}
-                  </button>
-                  <button className="cvc-btn" onClick={toggleMute} aria-label={volume === 0 ? "Unmute" : "Mute"}>
-                    {volume === 0 ? FA.close : FA.volume}
-                  </button>
-                  <div className="cvc-time">
-                    {formatTime(currentTime)} <span>/ {formatTime(duration)}</span>
+                  <img
+                    className="ceo-video-thumb"
+                    src={thumbSrc}
+                    alt="CEO introduction"
+                    loading="lazy"
+                    onError={() => {
+                      if (!thumbSrc.includes("hqdefault")) {
+                        setThumbSrc(`https://img.youtube.com/vi/${CEO_YT_ID}/hqdefault.jpg`);
+                      }
+                    }}
+                  />
+                  {!playing && (
+                    <>
+                      <div className="ceo-video-vignette" aria-hidden="true" />
+                      <div className="ceo-video-scanlines" aria-hidden="true" />
+                      <span className="ceo-video-play-wrap" aria-hidden="true">
+                        <span className="ceo-video-play-ring" />
+                        <span className="ceo-video-play-btn">{FA.play}</span>
+                      </span>
+                    </>
+                  )}
+                  <div ref={playerMountRef} className="ceo-yt-mount" style={{ display: playing ? 'block' : 'none' }} />
+                  
+                  {/* Custom Video Controls overlay */}
+                  <div 
+                    className="ceo-video-close" 
+                    onClick={(e) => { e.stopPropagation(); setPlaying(false); }}
+                    aria-label="Close video"
+                    role="button"
+                  >
+                    {FA.close}
                   </div>
-                  <div className="cvc-progress-wrap" ref={progressRef} onClick={handleSeek} role="slider" aria-valuenow={currentTime} aria-valuemax={duration} tabIndex={0}>
-                    <div className="cvc-progress-track">
-                      <div className="cvc-progress-fill" style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }} />
+                  <div className="ceo-video-controls" onClick={e => e.stopPropagation()}>
+                    <button className="cvc-btn play-pause" onClick={togglePlay} aria-label={paused ? "Play" : "Pause"}>
+                      {paused ? FA.play : FA.pause}
+                    </button>
+                    <button className="cvc-btn" onClick={toggleMute} aria-label={volume === 0 ? "Unmute" : "Mute"}>
+                      {volume === 0 ? FA.close : FA.volume}
+                    </button>
+                    <div className="cvc-time">
+                      {formatTime(currentTime)} <span>/ {formatTime(duration)}</span>
+                    </div>
+                    <div className="cvc-progress-wrap" ref={progressRef} onClick={handleSeek} role="slider" aria-valuenow={currentTime} aria-valuemax={duration} tabIndex={0}>
+                      <div className="cvc-progress-track">
+                        <div className="cvc-progress-fill" style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }} />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="ceo-transcript-wrap">
-              <aside className="ceo-transcript" aria-label="Video transcript">
-                <div className="ceo-transcript-label">Live Transcript</div>
-                <div className="ceo-transcript-scroll" ref={transcriptScrollRef}>
-                  {CEO_TRANSCRIPT.slice(0, activeSegment + 1).map((seg, i) => (
-                    <p
-                      key={i}
-                      role="button"
-                      tabIndex={0}
-                      className={`ceo-transcript-line${i === activeSegment ? " active" : ""}`}
-                      onClick={() => seekToSegment(i)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          seekToSegment(i);
-                        }
-                      }}
-                    >
-                      {seg.text}
-                    </p>
-                  ))}
-                </div>
-              </aside>
+              <div className="ceo-transcript-wrap">
+                <aside className="ceo-transcript" aria-label="Video transcript">
+                  <div className="ceo-transcript-label">Live Transcript</div>
+                  <div className="ceo-transcript-scroll" ref={transcriptScrollRef}>
+                    {CEO_TRANSCRIPT.map((line, i) => (
+                      <p
+                        key={i}
+                        className="ceo-transcript-line active"
+                      >
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                </aside>
+              </div>
             </div>
-          </div>
-          <div className="ceo-video-caption reveal reveal-delay-4">
-            <span className="ceo-video-caption-text">What we build · Who we are · Our services</span>
+            <div className="ceo-video-caption">
+              <span className="ceo-video-caption-text">What we build · Who we are · Our services</span>
+            </div>
           </div>
         </div>
       </div>
