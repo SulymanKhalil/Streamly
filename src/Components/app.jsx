@@ -104,7 +104,7 @@ const GlobalStyle = () => (
     html{scroll-behavior:smooth;}
     body{font-family:var(--font-body);background:var(--off-white);color:var(--text-primary);overflow-x:hidden;}
     h1,h2,h3,h4,h5,h6{font-family:var(--font-display);line-height:1.1;letter-spacing:-0.02em;}
-    section{position:relative;overflow:hidden;}
+    section{position:relative;}
     ::-webkit-scrollbar{width:4px;} ::-webkit-scrollbar-track{background:var(--gray-100);} ::-webkit-scrollbar-thumb{background:var(--seafoam);border-radius:2px;}
 
 
@@ -239,6 +239,7 @@ const GlobalStyle = () => (
     .hero-card-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(95,179,161,.15),rgba(232,128,106,.1));pointer-events:none;}
     .hero-badge{position:absolute;bottom:12px;left:12px;background:rgba(26,39,68,.85);backdrop-filter:blur(8px);border-radius:var(--radius-sm);padding:6px 10px;font-size:11px;color:rgba(255,255,255,.8);font-family:var(--font-display);font-weight:600;}
     .hero-ticker{border-top:1px solid rgba(255,255,255,.08);padding:14px 0;overflow:hidden;position:relative;z-index:2;}
+    .hero-ticker:hover .ticker-inner{animation-play-state:paused;}
     .ticker-inner{display:flex;gap:60px;white-space:nowrap;animation:ticker 45s linear infinite;width:max-content;}
     .ticker-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.35);font-family:var(--font-display);font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
     .ticker-dot{width:4px;height:4px;background:var(--seafoam);border-radius:50%;}
@@ -281,15 +282,12 @@ const GlobalStyle = () => (
     .team-section{background:var(--off-white);padding:120px 0;}
     .team-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;}
     .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
-    .team-card{background:var(--white);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--gray-200);transition:var(--transition);}
-    .team-card:hover{box-shadow:0 20px 48px rgba(26,39,68,.1);border-color:var(--seafoam-light);}
-    .avatar-ph{width:100%;aspect-ratio:3/4;overflow:hidden;position:relative;}
-    .avatar-ph img{width:100%;height:100%;object-fit:cover;object-position:center;}
-    .team-card-body{padding:20px 20px 12px 20px;}
-    .team-card-name{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px;}
-    .team-card-role{font-size:13px;color:var(--seafoam-dark);font-weight:500;margin-bottom:12px;}
-    .team-card-linkedin{display:inline-flex;align-items:center;gap:6px;color:var(--text-secondary);text-decoration:none;font-size:13px;transition:var(--transition);}
-    .team-card-linkedin:hover{color:var(--seafoam-dark);transform:translateY(-1px);}
+    .team-card{border-radius:2rem;padding:32px 24px 28px;display:flex;flex-direction:column;align-items:center;border:none;}
+    .team-avatar-container{width:100%;aspect-ratio:3/4;max-width:180px;background:var(--white);border-radius:1.5rem;display:flex;align-items:center;justify-content:center;padding:0;margin:0 auto 24px;box-shadow:0 8px 20px rgba(0,0,0,0.03);overflow:hidden;}
+    .team-avatar-container img{width:100%;height:100%;object-fit:cover;display:block;}
+    .team-card-body{padding:0;text-align:center;}
+    .team-card-name{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+    .team-card-role{font-size:14px;color:rgba(28,43,76,0.6);font-weight:500;margin-bottom:0;}
 
     /* ── CEO VIDEO ── */
     .ceo-video-section{background:var(--navy);padding:120px 0;position:relative;}
@@ -297,25 +295,23 @@ const GlobalStyle = () => (
     .ceo-video-header{text-align:center;max-width:620px;margin:0 auto 56px;position:relative;z-index:2;}
     .ceo-video-sub{font-size:16px;line-height:1.7;color:rgba(255,255,255,.55);margin-top:20px;}
     .ceo-video-stage{position:relative;z-index:2;padding:0 1rem;}
-    .ceo-video-layout{display:flex;gap:24px;transition:gap .5s var(--ease-out);}
-    .ceo-video-stage:not(.is-playing) .ceo-video-layout{gap:0;}
-    .ceo-video-col{flex:1;min-width:0;transition:flex .5s var(--ease-out);}
+    .ceo-video-layout{display:flex;flex-direction:row;gap:32px;align-items:stretch;}
+    .ceo-video-col{flex-basis:calc(50% - 16px);min-width:0;transition:flex .5s var(--ease-out);}
     .ceo-video-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:1rem;overflow:hidden;border:none;cursor:pointer;background:var(--navy-mid);padding:0;font:inherit;text-align:inherit;display:block;transition:box-shadow .45s var(--ease-out);}
-    .ceo-video-stage:not(.is-playing) .ceo-video-frame{min-height:min(50vw,420px);}
     .ceo-video-frame--player{cursor:default;}
     .ceo-video-frame:focus-visible{outline:2px solid var(--seafoam);outline-offset:2px;}
-    .ceo-video-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.3s;}
+    .ceo-video-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.3s;z-index:1;}
     .ceo-video-stage.is-playing .ceo-video-thumb{opacity:0;pointer-events:none;}
     .ceo-yt-mount{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
     .ceo-yt-mount iframe{position:absolute;top:-100%;left:0;width:100%;height:300%;border:0;}
-    .ceo-video-vignette{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,39,68,.72) 0%,rgba(26,39,68,.35) 45%,rgba(95,179,161,.25) 100%);pointer-events:none;z-index:2;}
-    .ceo-video-scanlines{position:absolute;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);opacity:.5;}
-    .ceo-video-play-wrap{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;}
+    .ceo-video-vignette{display:none;}
+    .ceo-video-scanlines{display:none;}
+    .ceo-video-play-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:3;pointer-events:none;}
     .ceo-video-play-ring{position:absolute;width:100px;height:100px;border-radius:50%;border:1px solid rgba(255,255,255,.25);animation:pulse-ring 2s ease-out infinite;}
     .ceo-video-play-btn{position:relative;width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--salmon),var(--salmon-dark));display:flex;align-items:center;justify-content:center;color:var(--white);box-shadow:0 12px 40px rgba(232,128,106,.45);transition:transform .35s var(--ease-spring),box-shadow .35s;}
     .ceo-video-frame:hover .ceo-video-play-btn{transform:scale(1.1);box-shadow:0 16px 48px rgba(232,128,106,.55);}
     .ceo-video-play-btn svg{width:22px;height:22px;margin-left:4px;}
-    .ceo-video-caption{margin-top:16px;text-align:left;}
+    .ceo-video-caption{display:none;}
     .ceo-video-caption-text{font-family:var(--font-display);font-size:clamp(14px,2vw,16px);font-weight:700;color:var(--white);letter-spacing:.04em;text-transform:uppercase;}
 
     /* Custom Video Controls */
@@ -338,31 +334,64 @@ const GlobalStyle = () => (
     .cvc-progress-track{width:100%;height:4px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden;position:relative;}
     .cvc-progress-fill{position:absolute;top:0;left:0;height:100%;background:var(--seafoam);border-radius:2px;width:0%;transition:width 0.1s linear;}
     
-    /* Transcript */
-    .ceo-transcript-wrap{opacity:0;flex-basis:0;width:0;position:relative;overflow:hidden;transition:all .5s var(--ease-out);}
-    .ceo-video-stage.is-playing .ceo-transcript-wrap{opacity:1;flex-basis:calc(50% - 12px);width:50%;}
+    .cvc-volume-wrap{display:flex;align-items:center;gap:8px;}
+    .cvc-volume-slider{
+      width:70px;
+      height:4px;
+      -webkit-appearance:none;
+      background:rgba(255,255,255,.2);
+      border-radius:2px;
+      outline:none;
+      cursor:pointer;
+      transition:background 0.3s;
+    }
+    .cvc-volume-slider::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 4px;
+      cursor: pointer;
+      background: transparent;
+      border-radius: 2px;
+    }
+    .cvc-volume-slider::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      height:12px;
+      width:12px;
+      border-radius:50%;
+      background:var(--seafoam);
+      cursor:pointer;
+      margin-top:-4px;
+    }
+    .cvc-volume-slider::-moz-range-thumb{
+      height:12px;
+      width:12px;
+      border-radius:50%;
+      background:var(--seafoam);
+      cursor:pointer;
+      border:none;
+    }
     
-    .ceo-transcript{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1rem;padding:28px 24px;display:flex;flex-direction:column;position:absolute;inset:0;width:100%;min-width:400px;}
+    /* Transcript */
+    .ceo-transcript-wrap{opacity:1;flex-basis:calc(50% - 16px);width:50%;position:relative;transition:all .5s var(--ease-out);display:flex;flex-direction:column;}
+    
+    .ceo-transcript{position:absolute;inset:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1rem;padding:28px 24px;display:flex;flex-direction:column;min-height:0;min-width:0;box-sizing:border-box;}
     .ceo-transcript-label{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--seafoam);margin-bottom:20px;flex-shrink:0;}
-    .ceo-transcript-scroll{flex:1;overflow-y:auto;max-height:min(56.25vw,52vh);padding-right:8px;scrollbar-width:thin;scrollbar-color:var(--seafoam) transparent;}
+    .ceo-transcript-scroll{flex:1;overflow-y:auto;padding-right:8px;scrollbar-width:thin;scrollbar-color:var(--seafoam) transparent;min-height:0;}
     .ceo-transcript-scroll::-webkit-scrollbar{width:4px;}
     .ceo-transcript-scroll::-webkit-scrollbar-thumb{background:var(--seafoam);border-radius:2px;}
     .ceo-transcript-line{font-size:15px;line-height:1.75;color:rgba(255,255,255,.45);padding:14px 16px;border-radius:0;margin-bottom:8px;border-left:3px solid transparent;cursor:pointer;transition:color .25s,border-color .25s;}
-    .ceo-transcript-line:last-child{margin-bottom:0;}
-    .ceo-transcript-line:hover{color:rgba(255,255,255,.75);}
     .ceo-transcript-line.active{color:var(--white);background:transparent;border-left:3px solid var(--seafoam);}
 
     /* ── TESTIMONIALS ── */
-    .testi-section{background:var(--navy);padding:120px 0;position:relative;}
-    .testi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:64px;}
-    .testi-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:32px;transition:transform .35s var(--ease-spring),box-shadow .35s,background .3s,border-color .3s;position:relative;z-index:1;}
-    .testi-card:hover{}
-    .testi-card.featured{grid-column:1/3;background:linear-gradient(135deg,rgba(95,179,161,.12),rgba(232,128,106,.08));border-color:rgba(95,179,161,.2);}
-    .testi-card.tall{grid-row:1/3;}
+    .testi-section{background:var(--navy);position:relative;overflow:visible;}
+    .testi-track{height:300vh;position:relative;}
+    .testi-sticky{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
+    .testi-carousel-track{display:flex;gap:24px;width:max-content;padding:0 max(5vw, calc((100vw - var(--container)) / 2));will-change:transform;transition:transform 0.05s linear;}
+    .testi-card{background:rgba(255,255,255,.03);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius-lg);padding:32px 32px 24px 32px;position:relative;z-index:1;width:520px;flex-shrink:0;display:flex;flex-direction:column;}
+    .testi-card.featured{background:rgba(255,255,255,.03);backdrop-filter:blur(12px);border-color:rgba(255,255,255,.07);width:640px;}
     .testi-quote{color:var(--seafoam);opacity:.7;margin-bottom:16px;}
-    .testi-text{font-size:15px;line-height:1.75;color:rgba(255,255,255,.7);margin-bottom:28px;}
-    .testi-card.featured .testi-text{font-size:17px;color:rgba(255,255,255,.85);}
-    .testi-author{display:flex;align-items:center;gap:12px;}
+    .testi-text{font-size:15px;line-height:1.75;color:rgba(255,255,255,.8);margin-bottom:28px;}
+    .testi-card.featured .testi-text{font-size:17px;color:rgba(255,255,255,.8);}
+    .testi-author{display:flex;align-items:center;gap:12px;margin-top:auto;}
     .testi-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);flex-shrink:0;}
     .testi-name{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);}
     .testi-country{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px;}
@@ -436,9 +465,9 @@ const GlobalStyle = () => (
       .ceo-video-section{padding:80px 0;}
       .ceo-video-header{margin-bottom:40px;}
       .ceo-video-sub{font-size:15px;}
-      .ceo-video-stage.is-playing .ceo-video-layout{grid-template-columns:1fr;}
-      .ceo-video-stage:not(.is-playing) .ceo-video-frame{min-height:min(56vw,320px);}
-      .ceo-transcript-scroll{max-height:360px;}
+      .ceo-video-layout{flex-direction:column;gap:20px;}
+      .ceo-video-col{flex-basis:auto!important;width:100%!important;}
+      .ceo-transcript-wrap{flex-basis:auto!important;width:100%!important;position:relative;height:360px;}
       .ceo-video-play-ring{width:88px;height:88px;}
       .ceo-video-play-btn{width:68px;height:68px;}
       .ceo-video-play-btn svg{width:18px;height:18px;}
@@ -446,7 +475,8 @@ const GlobalStyle = () => (
       .nav-hamburger{display:flex;}
       .nav-links{display:none;}
       .testi-grid{grid-template-columns:1fr;}
-      .testi-card.featured{grid-column:auto;}
+      .testi-card{width:min(480px, 85vw);}
+      .testi-card.featured{grid-column:auto;width:min(580px, 90vw);}
       .footer-top{grid-template-columns:1fr;gap:32px;}
       .stat-strip-inner{grid-template-columns:1fr 1fr;}
       .stat-block{padding:32px 24px;}
@@ -476,21 +506,25 @@ const TEAM = [
     name: "Anas Ali",
     role: "Founder & CEO | Senior Architect",
     Image: "/images/anasAli.jpeg",
+    objectPosition: "center 5%",
   },
   {
     name: "Shumail Nazir",
     role: "Co-Founder & CTO | Video Streaming Expert",
-    Image: "/images/shumailNazir.jfif",
+    Image: "/images/shumailNazir.jpg",
+    objectPosition: "center center",
   },
   {
     name: "Muhammad Qadeer",
     role: "Backend Engineer | WebRTC & FFmpeg",
     Image: "/images/qadeerAmin.jfif",
+    objectPosition: "center center",
   },
   {
     name: "Sulyman Khalil",
     role: "Frontend Engineer | FFmpeg",
     Image: "/images/sulymanKhalil.jpg",
+    objectPosition: "center 10%",
   },
 ];
 
@@ -508,14 +542,14 @@ const TESTIMONIALS = [
     country: "Türkiye",
     initials: "ZE",
     bg: "#dc2906ff",
-    text: "Our VOD platform went from concept to launch in 10 weeks. Absolutely world class engineering team.",
+    text: "Our VOD platform went from concept to production launch in 10 weeks. The team delivered a flawless transcoding pipeline and thumbnail generator that scaled smoothly on day one.",
   },
   {
     name: "Christopher",
     country: "Germany",
     initials: "C",
     bg: "#8a8f0aff",
-    text: "The real time streaming solution they built for our sports platform is rock solid. Sub second latency, even at massive scale.",
+    text: "The real-time live streaming architecture they designed and built for our sports broadcasting platform is rock solid. We achieved reliable sub-second latency globally, even during peak events with massive traffic spikes, transforming our user experience.",
     tall: true,
   },
   {
@@ -523,7 +557,7 @@ const TESTIMONIALS = [
     country: "Mexico",
     initials: "CM",
     bg: "#e8806a",
-    text: "They built our custom CDN integration and DRM system. Rock solid, professional, delivered on time.",
+    text: "They engineered our custom multi-region CDN distribution and integrated DRM content protection. Highly professional and delivered ahead of schedule.",
   },
 ];
 
@@ -1050,7 +1084,7 @@ function Nav() {
         <a href="#home" className="nav-logo" aria-label="Home">
           <div className="nav-logo-mark">{FA.play}</div>
           <div className="nav-divider" />
-          <span className="nav-wordmark">Streamly</span>
+          <span className="nav-wordmark">Streamli</span>
         </a>
 
         <ul className="nav-links">
@@ -1305,7 +1339,7 @@ function About() {
               {[
                 {
                   title: "About Us",
-                  text: "At Streamly, We build and engineer video streaming systems and cutting edge digital products. Founded in 2022, we've built streaming infrastructure for broadcasters, OTT platforms, and enterprise clients across 15+ countries. Our engineers blend deep protocol level expertise with modern cloud-native architectures to deliver systems that scale without compromise.",
+                  text: "At Streamli, We build and engineer video streaming systems and cutting edge digital products. Founded in 2022, we've built streaming infrastructure for broadcasters, OTT platforms, and enterprise clients across 15+ countries. Our engineers blend deep protocol level expertise with modern cloud-native architectures to deliver systems that scale without compromise.",
                 },
                 {
                   title: "Founder's Perspective",
@@ -1466,6 +1500,7 @@ function About() {
 
 /* ─── TEAM ───────────────────────────────────────────────────────────── */
 function Team() {
+  const colors = ['#d8c3b3', '#d0ebf5', '#ebdfff', '#dfcbb5'];
   return (
     <section className="team-section" id="team">
       <div className="section-wrap">
@@ -1500,9 +1535,14 @@ function Team() {
             <div
               key={m.name}
               className={`team-card reveal reveal-delay-${(i % 4) + 1}`}
+              style={{ backgroundColor: colors[i % colors.length] }}
             >
-              <div className="avatar-ph">
-                <img src={m.Image} alt={m.name} />
+              <div className="team-avatar-container">
+                <img 
+                  src={m.Image} 
+                  alt={m.name} 
+                  style={{ objectPosition: m.objectPosition || 'center center' }}
+                />
               </div>
               <div className="team-card-body">
                 <div className="team-card-name">{m.name}</div>
@@ -1520,7 +1560,7 @@ function Team() {
 const CEO_YT_ID = "UsHGF4ox5Fs";
 
 const CEO_TRANSCRIPT = [
-  "Hi, I’m Anas — a Software Engineer with over 7 years of experience and the founder of Streamly.",
+  "Hi, I’m Anas — a Software Engineer with over 7 years of experience and the founder of Streamli.",
   "I specialize in building scalable web & mobile applications, and video streaming development for startups, businesses, and growing platforms.",
   "On the application development side, my team and I work across full-stack development using technologies like MERN Stack, TypeScript, React Native, Flutter and modern backend architectures — always choosing the right technology based on the project requirements.",
   "For Video streaming development, I work with WebRTC for video calls, FFmpeg and GStreamer for media processing and transcoding, and HLS and RTMP for live streaming Projects.",
@@ -1588,7 +1628,7 @@ function CeoVideo() {
           rel: 0,
           modestbranding: 1,
           playsinline: 1,
-          controls: 1,
+          controls: 0,
           disablekb: 1,
           showinfo: 0,
           title: 0,
@@ -1598,6 +1638,7 @@ function CeoVideo() {
             if (!cancelled) {
               setDuration(e.target.getDuration() || 0);
               e.target.setVolume(volume);
+              e.target.playVideo();
             }
           },
           onStateChange: (e) => {
@@ -1638,15 +1679,35 @@ function CeoVideo() {
     else playerRef.current.pauseVideo();
   };
 
+  const handleVolumeChange = (e) => {
+    const val = parseInt(e.target.value, 10);
+    setVolume(val);
+    if (playerRef.current) {
+      if (typeof playerRef.current.setVolume === 'function') {
+        playerRef.current.setVolume(val);
+      }
+      if (val === 0) {
+        if (typeof playerRef.current.mute === 'function') {
+          playerRef.current.mute();
+        }
+      } else {
+        if (typeof playerRef.current.unMute === 'function') {
+          playerRef.current.unMute();
+        }
+      }
+    }
+  };
+
   const toggleMute = (e) => {
     e?.stopPropagation();
-    if (!playerRef.current?.isMuted) return;
-    if (playerRef.current.isMuted()) {
-      playerRef.current.unMute();
-      setVolume(100);
-    } else {
-      playerRef.current.mute();
+    if (!playerRef.current) return;
+    if (volume > 0) {
+      if (typeof playerRef.current.mute === 'function') playerRef.current.mute();
       setVolume(0);
+    } else {
+      if (typeof playerRef.current.unMute === 'function') playerRef.current.unMute();
+      if (typeof playerRef.current.setVolume === 'function') playerRef.current.setVolume(100);
+      setVolume(100);
     }
   };
 
@@ -1687,8 +1748,7 @@ function CeoVideo() {
             Hear It From Our <span style={{ color: "var(--seafoam)" }}>CEO</span>
           </h2>
           <p className="ceo-video-sub reveal reveal-delay-2">
-            Anas Ali walks through what we build, who we are, and the services
-            we deliver — straight from the architect behind Streamly.
+            Anas Ali walks through what we build, who we are, and the services we deliver — straight from the architect behind Streamli.
           </p>
         </header>
 
@@ -1710,18 +1770,20 @@ function CeoVideo() {
                     }
                   }}
                 >
-                  <img
-                    className="ceo-video-thumb"
-                    src={thumbSrc}
-                    alt="CEO introduction"
-                    loading="lazy"
-                    onError={() => {
-                      if (!thumbSrc.includes("hqdefault")) {
-                        setThumbSrc(`https://img.youtube.com/vi/${CEO_YT_ID}/hqdefault.jpg`);
-                      }
-                    }}
-                  />
                   {!playing && (
+                    <img
+                      className="ceo-video-thumb"
+                      src={thumbSrc}
+                      alt="CEO introduction"
+                      loading="lazy"
+                      onError={() => {
+                        if (!thumbSrc.includes("hqdefault")) {
+                          setThumbSrc(`https://img.youtube.com/vi/${CEO_YT_ID}/hqdefault.jpg`);
+                        }
+                      }}
+                    />
+                  )}
+                  {(!playing || paused) && (
                     <>
                       <div className="ceo-video-vignette" aria-hidden="true" />
                       <div className="ceo-video-scanlines" aria-hidden="true" />
@@ -1731,24 +1793,33 @@ function CeoVideo() {
                       </span>
                     </>
                   )}
-                  <div ref={playerMountRef} className="ceo-yt-mount" style={{ display: playing ? 'block' : 'none' }} />
+                  <div ref={playerMountRef} className="ceo-yt-mount" style={{ display: 'block' }} />
                   
                   {/* Custom Video Controls overlay */}
-                  <div 
-                    className="ceo-video-close" 
-                    onClick={(e) => { e.stopPropagation(); setPlaying(false); }}
-                    aria-label="Close video"
-                    role="button"
-                  >
-                    {FA.close}
-                  </div>
+
                   <div className="ceo-video-controls" onClick={e => e.stopPropagation()}>
                     <button className="cvc-btn play-pause" onClick={togglePlay} aria-label={paused ? "Play" : "Pause"}>
                       {paused ? FA.play : FA.pause}
                     </button>
-                    <button className="cvc-btn" onClick={toggleMute} aria-label={volume === 0 ? "Unmute" : "Mute"}>
-                      {volume === 0 ? FA.close : FA.volume}
-                    </button>
+                    <div className="cvc-volume-wrap">
+                      <button className="cvc-btn" onClick={toggleMute} aria-label={volume === 0 ? "Unmute" : "Mute"}>
+                        {volume === 0 ? (
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                          </svg>
+                        ) : (
+                          FA.volume
+                        )}
+                      </button>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={volume}
+                        onChange={handleVolumeChange}
+                        className="cvc-volume-slider"
+                      />
+                    </div>
                     <div className="cvc-time">
                       {formatTime(currentTime)} <span>/ {formatTime(duration)}</span>
                     </div>
@@ -1789,76 +1860,105 @@ function CeoVideo() {
 
 /* ─── TESTIMONIALS ──────────────────────────────────────────────────── */
 function Testimonials() {
+  const trackRef = useRef(null);
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!trackRef.current || !scrollRef.current) return;
+      const rect = trackRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const maxScroll = rect.height - windowHeight;
+      let p = -rect.top / maxScroll;
+      p = Math.max(0, Math.min(1, p));
+      
+      const scrollWidth = scrollRef.current.scrollWidth;
+      const containerWidth = scrollRef.current.parentElement ? scrollRef.current.parentElement.clientWidth : window.innerWidth;
+      const maxTranslate = Math.max(0, scrollWidth - containerWidth);
+      
+      scrollRef.current.style.transform = `translateX(-${p * maxTranslate}px)`;
+    };
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <section className="testi-section" id="testimonials">
-      <div className="noise" />
-      <div className="section-wrap" style={{ position: "relative", zIndex: 2 }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-          }}
-        >
-          <div>
-            <div className="section-label reveal">
-              <div
-                className="section-label-line"
-                style={{ background: "var(--seafoam)" }}
-              />
-              <span
-                className="section-label-text"
-                style={{ color: "var(--seafoam)" }}
-              >
-                Testimonials
-              </span>
-            </div>
-            <h2
-              className="section-h2 reveal reveal-delay-1"
-              style={{ color: "var(--white)" }}
-            >
-              Trusted by Teams
-              <br />
-              <span style={{ color: "var(--seafoam)" }}>Across the Globe</span>
-            </h2>
-          </div>
-          <div
-            className="reveal reveal-delay-2"
-            style={{ display: "flex", gap: 4, alignItems: "center" }}
-          >
-            {[1, 2, 3, 4, 5].map((s) => (
-              <span key={s} style={{ color: "var(--salmon)" }}>
-                {FA.star}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="testi-grid">
-          {TESTIMONIALS.map((t, i) => (
+      <div className="testi-track" ref={trackRef}>
+        <div className="testi-sticky">
+          <div className="noise" />
+          <div className="section-wrap" style={{ position: "relative", zIndex: 2, marginBottom: 40, flexShrink: 0 }}>
             <div
-              key={t.name}
-              className={`testi-card reveal reveal-delay-${i + 1}${t.featured ? " featured" : ""}${t.tall ? " tall" : ""}`}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+              }}
             >
-              <div className="testi-stars">
+              <div>
+                <div className="section-label reveal">
+                  <div
+                    className="section-label-line"
+                    style={{ background: "var(--seafoam)" }}
+                  />
+                  <span
+                    className="section-label-text"
+                    style={{ color: "var(--seafoam)" }}
+                  >
+                    Testimonials
+                  </span>
+                </div>
+                <h2
+                  className="section-h2 reveal reveal-delay-1"
+                  style={{ color: "var(--white)" }}
+                >
+                  Trusted by Teams
+                  <br />
+                  <span style={{ color: "var(--seafoam)" }}>Across the Globe</span>
+                </h2>
+              </div>
+              <div
+                className="reveal reveal-delay-2"
+                style={{ display: "flex", gap: 4, alignItems: "center" }}
+              >
                 {[1, 2, 3, 4, 5].map((s) => (
                   <span key={s} style={{ color: "var(--salmon)" }}>
                     {FA.star}
                   </span>
                 ))}
               </div>
-              <div className="testi-quote">{FA.quote}</div>
-              <p className="testi-text">{t.text}</p>
-              <div className="testi-author">
-                <div className="testi-avatar" style={{ background: t.bg }}>
-                  {t.initials}
-                </div>
-                <div>
-                  <div className="testi-name">{t.name}</div>
-                  <div className="testi-country">{t.country}</div>
-                </div>
-              </div>
             </div>
-          ))}
+          </div>
+          <div style={{ width: "100%", overflow: "hidden", position: "relative", zIndex: 2 }}>
+            <div className="testi-carousel-track" ref={scrollRef}>
+              {TESTIMONIALS.map((t, i) => (
+                <div
+                  key={t.name}
+                  className={`testi-card reveal reveal-delay-${i + 1}${t.featured ? " featured" : ""}${t.tall ? " tall" : ""}`}
+                >
+                  <div className="testi-stars">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <span key={s} style={{ color: "var(--salmon)" }}>
+                        {FA.star}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="testi-quote">{FA.quote}</div>
+                  <p className="testi-text">{t.text}</p>
+                  <div className="testi-author">
+                    <div className="testi-avatar" style={{ background: t.bg }}>
+                      {t.initials}
+                    </div>
+                    <div>
+                      <div className="testi-name">{t.name}</div>
+                      <div className="testi-country">{t.country}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -2193,7 +2293,7 @@ function Footer() {
                   color: "rgba(255,255,255,.4)",
                 }}
               >
-                Streamly
+                Streamli
               </span>
             </div>
             <p className="footer-desc">
