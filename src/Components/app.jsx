@@ -522,7 +522,7 @@ const TEAM = [
   },
   {
     name: "Sulyman Khalil",
-    role: "Frontend Engineer | FFmpeg",
+    role: "Full Stack Engineer | FFmpeg",
     Image: "/images/sulymanKhalil.jpg",
     objectPosition: "center 10%",
   },
